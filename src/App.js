@@ -6,17 +6,18 @@ import './App.css';
 // create components for handling with Route
 const HatsPage = () => (
   <div>
-    <h1>Hats Page</h1>
+    <h1>HATS PAGE</h1>
   </div>  
 );
 
 
-
+// <HomePage />
 function App() {
+  
   return (
     <div>
-      <HomePage />
-    
+      <Route exact path='/' component={HomePage}/>
+      <Route path='/hats' component={HatsPage}/>
     </div>
   );
 }
