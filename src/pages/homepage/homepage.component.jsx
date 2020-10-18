@@ -5,11 +5,12 @@ import MenuItem from '../../components/menu-item/menu-item.component';
 import {Link} from 'react-router-dom';
 
 
-const HomePage = (props) => {
-  console.log(props)
+const HomePage = () => {
+  // console.log(props)
+  // <button onClick={() => props.history.push('/hats')}>HatsPage</button>
+  // <Link to="/hats">Choose Hats</Link>
   return (
   <div className='homepage'>
-    <Link to="/hats">Choose Hats</Link>
     <Directory>
       <MenuItem />
     </Directory>
