@@ -21,11 +21,30 @@ class App extends React.Component {
   unsubsriveFromAuth = null
 
   componentDidMount() {
-    this.unsubsriveFromAuth = auth.onAuthStateChanged(async user => {
+    this.unsubsriveFromAuth = auth.onAuthStateChanged(async userAuth => {
       // this.setState({currentUser: user})
       // console.log(user);
       
-      createUserProfileDocument(user);
+      // createUserProfileDocument(user);
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        userRef.onSnapshot(snapShot => {
+          // console.log(snapShot.data()); // but doesn't represent the id as it is at snapShot
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          }
+          // , () => console.log(this.state)
+          )
+        });
+
+        
+        
+        this.setState({currentUser: userAuth})
+      }
 
     })
 
