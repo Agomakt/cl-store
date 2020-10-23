@@ -1,4 +1,5 @@
 import React  from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './header.styles.scss';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
@@ -15,7 +16,7 @@ const Header = ({ currentUser }) => (
       <Link className='option' to='/contact'>CONTACT</Link>
       {
         currentUser ? (
-          <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
+          <Link className='option' onClick={() => auth.signOut()}>SIGN OUT</Link>
           ) : (
             <Link className='option' to='/signin'>SIGN IN</Link>
           )
@@ -26,4 +27,10 @@ const Header = ({ currentUser }) => (
   </div>
 )
 
-export default Header;
+// function that allows access to state, being RootReducer
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
+
+export default connect(mapStateToProps)(Header);
