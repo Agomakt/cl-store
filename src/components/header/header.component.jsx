@@ -27,7 +27,7 @@ const Header = ({ currentUser }) => (
   </div>
 )
 
-
+// function that allows access to state, being RootReducer
 const mapStateToProps = state => ({
   currentUser: state.user.currentUser
 })
