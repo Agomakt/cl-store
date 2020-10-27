@@ -1,4 +1,6 @@
+import memoize from 'lodash.memoize';
 import { createSelector } from 'reselect';
+
 
 const COLLECTIION_ID_MAP = {
   // object that maps id to the string value
@@ -18,10 +20,10 @@ export const selectCollections = createSelector(
 )
 
 
-export const selectCollection = collectionUrlParam => (
+export const selectCollection = memoize(collectionUrlParam => (
   createSelector(
     [selectCollections],
     collections => 
       collections.find(collection => collection.id === COLLECTIION_ID_MAP[collectionUrlParam])
   )
-)
+));
