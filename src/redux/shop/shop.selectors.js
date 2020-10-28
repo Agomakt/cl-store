@@ -1,17 +1,6 @@
 import memoize from 'lodash.memoize';
 import { createSelector } from 'reselect';
 
-
-const COLLECTIION_ID_MAP = {
-  // object that maps id to the string value
-  hats: 1,
-  sneakers: 2,
-  jackets: 3,
-  womens: 4,
-  mens: 5
-} 
-
-
 const selectShop = state =>  state.shop;
 
 export const selectCollections = createSelector(
@@ -19,11 +8,16 @@ export const selectCollections = createSelector(
   shop => shop.collections
 )
 
+export const selectCollectionsForPreview = createSelector(
+  [selectCollections],
+  collections => Object.keys(collections).map(key => collections[key])
+);
 
-export const selectCollection = memoize(collectionUrlParam => (
-  createSelector(
+
+export const selectCollection = memoize(collectionUrlParam => {
+  return createSelector(
     [selectCollections],
-    collections => 
-      collections.find(collection => collection.id === COLLECTIION_ID_MAP[collectionUrlParam])
+    collections => collections[collectionUrlParam]   
   )
-));
+  
+});
